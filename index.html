@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamil Cinema Hub</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#0b0f1a;
+    color:white;
+}
+
+/* Hero Section */
+
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.75)),
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero-content{
+    max-width:800px;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:70px;
+    color:#ffcc00;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:24px;
+    margin-bottom:30px;
+}
+
+.btn{
+    background:#e50914;
+    color:white;
+    border:none;
+    padding:14px 30px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.08);
+}
+
+/* Filter */
+
+.filters{
+    text-align:center;
+    padding:40px 20px;
+}
+
+.filters h2{
+    margin-bottom:20px;
+}
+
+.filters button{
+    margin:10px;
+    padding:12px 22px;
+    border:none;
+    border-radius:25px;
+    background:#1e293b;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.filters button:hover{
+    background:#e50914;
+}
+
+/* Movies */
+
+.movies{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    padding:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.4s;
+    backdrop-filter:blur(10px);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.card-content h3{
+    color:#ffcc00;
+    margin-bottom:10px;
+}
+
+.rating{
+    color:gold;
+    margin-bottom:10px;
+}
+
+.card-content p{
+    color:#ddd;
+    margin-bottom:15px;
+}
+
+/* Popup */
+
+.popup{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+}
+
+.popup-content{
+    background:white;
+    color:black;
+    width:350px;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.popup-content input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+.close{
+    background:red;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#020617;
+    margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>தமிழ் சினிமா ஹப்</h1>
+        <p>
+            Explore the Latest Tamil Blockbusters,
+            Classics & Upcoming Releases
+        </p>
+
+        <button class="btn" onclick="scrollToMovies()">
+            Explore Movies
+        </button>
+    </div>
+</section>
+
+<!-- FILTERS -->
+
+<section class="filters">
+    <h2>Browse Movies</h2>
+
+    <button onclick="filterMovies('all')">All Movies</button>
+    <button onclick="filterMovies('action')">Action</button>
+    <button onclick="filterMovies('drama')">Drama</button>
+</section>
+
+<!-- MOVIES -->
+
+<section class="movies" id="movies">
+
+    <div class="card action">
+        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c">
+        <div class="card-content">
+            <h3>Coolie</h3>
+            <div class="rating">⭐ 9.1/10</div>
+            <p>
+                Superstar Rajinikanth returns in a powerful
+                action entertainer directed by Lokesh Kanagaraj.
+            </p>
+            <button class="btn" onclick="openPopup()">
+                View Details
+            </button>
+        </div>
+    </div>
+
+    <div class="card action">
+        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26">
+        <div class="card-content">
+            <h3>Leo</h3>
+            <div class="rating">⭐ 8.8/10</div>
+            <p>
+                Vijay stars in a stylish action thriller
+                packed with suspense and emotions.
+            </p>
+            <button class="btn" onclick="openPopup()">
+                View Details
+            </button>
+        </div>
+    </div>
+
+    <div class="card drama">
+        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728">
+        <div class="card-content">
+            <h3>Viduthalai Part 2</h3>
+            <div class="rating">⭐ 8.9/10</div>
+            <p>
+                A gripping rural political drama directed
+                by Vetri Maaran.
+            </p>
+            <button class="btn" onclick="openPopup()">
+                View Details
+            </button>
+        </div>
+    </div>
+
+    <div class="card drama">
+        <img src="https://images.unsplash.com/photo-1511497584788-876760111969">
+        <div class="card-content">
+            <h3>Amaran</h3>
+            <div class="rating">⭐ 9.0/10</div>
+            <p>
+                Based on the life of Major Mukund
+                Varadarajan, starring Sivakarthikeyan.
+            </p>
+            <button class="btn" onclick="openPopup()">
+                View Details
+            </button>
+        </div>
+    </div>
+
+    <div class="card action">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1">
+        <div class="card-content">
+            <h3>Thug Life</h3>
+            <div class="rating">⭐ 9.2/10</div>
+            <p>
+                Kamal Haasan and Mani Ratnam reunite for
+                an epic gangster action drama.
+            </p>
+            <button class="btn" onclick="openPopup()">
+                View Details
+            </button>
+        </div>
+    </div>
+
+    <div class="card drama">
+        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba">
+        <div class="card-content">
+            <h3>Meiyazhagan</h3>
+            <div class="rating">⭐ 8.7/10</div>
+            <p>
+                A heartwarming emotional drama starring
+                Karthi and Arvind Swamy.
+            </p>
+            <button class="btn" onclick="openPopup()">
+                View Details
+            </button>
+        </div>
+    </div>
+
+</section>
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+
+    <div class="popup-content">
+
+        <h2>Add to Watchlist</h2>
+
+        <input type="text" placeholder="Movie Name">
+
+        <input type="email" placeholder="Your Email">
+
+        <button class="btn" onclick="submitForm()">
+            Add
+        </button>
+
+        <br><br>
+
+        <button class="close" onclick="closePopup()">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+    <h3>© 2026 தமிழ் சினிமா ஹப் | Kollywood Movies & Entertainment</h3>
+</footer>
+
+<script>
+
+function scrollToMovies(){
+    document.getElementById("movies")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+function openPopup(){
+    document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+function submitForm(){
+    alert("Movie added to your watchlist!");
+    closePopup();
+}
+
+function filterMovies(category){
+
+    let cards=document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+
+        if(category==="all"){
+            card.style.display="block";
+        }
+        else if(card.classList.contains(category)){
+            card.style.display="block";
+        }
+        else{
+            card.style.display="none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
